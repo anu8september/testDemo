@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ApiServiceService } from './service/api-service.service';
 
 @Component({
@@ -9,26 +9,47 @@ import { ApiServiceService } from './service/api-service.service';
 })
 export class AppComponent {
   title = 'demoProject';
- form:FormGroup
- submitted:boolean=false
+  form: FormGroup
+  submitted: boolean = false
+  productdata: any = []
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-    name:['',Validators.required],
-    email:['',Validators.required],
-    password:['',Validators.required],
-    gender:['',Validators.required]
+      name: ['', Validators.required],
+      color: ['', Validators.required],
+      size: ['', Validators.required],
+      quantity: ['', Validators.required]
+    })
 
-
-  })
   }
 
-  ngOnInit(){
-    
-   }
-   SubmitForm(form:any){
-     this.submitted=true
-     console.log(form.value,"formData")
-   } 
- 
+  ngOnInit() {
+    const ProductArr = new FormArray([
+      new FormControl('product1'),
+      new FormControl('red'),
+      new FormControl('10'),
+      new FormControl('100')
+    ])
+
+  }
+  SubmitForm(form: any) {
+    this.submitted = true;
+    console.log(this.form)
+    if (this.form.status == "VALID") {
+      this.productdata.push(form.value)
+      console.log(form.value, "formData")
+      let control: AbstractControl = null as any;
+      form.reset()
+      form.markAsUntouched(false);
+      this.form.markAsPristine();
+      Object.keys(this.form.controls).forEach(name => {
+        control = this.form.controls[name];
+        control.setErrors(null);
+      });
+    }
+  }
+
+  get registerFormControl() {
+    return this.form.controls;
+  }
 }
