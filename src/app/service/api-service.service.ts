@@ -13,4 +13,9 @@ export class ApiServiceService {
      return this.http.get(this.url + 'api/v1/employees')
       
   }
+  getProductData(){
+    return this.http
+      .get<Response>("assets/json/product.json")
+      .pipe((response:any) => response);
+  }
 }

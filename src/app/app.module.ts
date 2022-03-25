@@ -7,12 +7,13 @@ import {CharacterOnlyDirective} from './directives/character-only/character-only
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { CustomSearch } from "../../src/assets/pipe/custom-search.pipe"
 @NgModule({
   declarations: [
     AppComponent,
     NumberOnlyDirective,
-    CharacterOnlyDirective
+    CharacterOnlyDirective,
+    CustomSearch
   ],
   exports: [
     FormsModule,

@@ -1,0 +1,27 @@
+{
+    "ProductArray": [
+        {
+            "image":"../assets/images/dummy.jpg",
+           "Name": "Sony",
+          "category":"TV",
+          "Price":"1000"
+        },
+        {
+            "image":"../assets/images/dummy.jpg",
+           "Name": "LG",
+          "category":"TV",
+          "Price":"1200"
+        },  {
+            "image":"../assets/images/dummy.jpg",
+           "Name": "Samsung",
+          "category":"TV",
+          "Price":"1400"
+        },  {
+            "image":"../assets/images/th.jpg",
+           "Name": "sony",
+          "category":"TV",
+          "Price":"1600"
+        }
+    
+    ]
+}

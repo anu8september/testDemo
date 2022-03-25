@@ -12,63 +12,26 @@
 </head>
 
 <body>
-
-  <div class="container">
-    <div class="p-5 text-center">
-      <h1 class="mb-3">Product</h1>
-    </div>
-    <form [formGroup]="form" (ngSubmit)="SubmitForm(form)">
-      <div class="form-group">
-        <input type="text" placeholder="Name" class="form-control" formControlName="name" maxlength="15">
-        <span class="text-danger"
-          *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
-          Name is required
-        </span>
-      </div>
-      <div class="form-group">
-        <input type="text" placeholder="color" class="form-control" formControlName="color" maxlength="10">
-        <span class="text-danger"
-          *ngIf="(registerFormControl.color.touched || submitted) && registerFormControl.color.errors?.required">
-          Color is required
-        </span>
-      </div>
-      <div class="form-group">
-        <input type="text" placeholder="size" class="form-control" formControlName="size" appNumberOnly maxlength="5">
-        <span class="text-danger"
-          *ngIf="(registerFormControl.size.touched || submitted) && registerFormControl.size.errors?.required">
-          Size is required
-        </span>
-      </div>
-      <div class="form-group">
-        <input type="text" placeholder="quantity" class="form-control" formControlName="quantity" maxlength="4"
-          appNumberOnly>
-        <span class="text-danger"
-          *ngIf="(registerFormControl.quantity.touched || submitted) && registerFormControl.quantity.errors?.required">
-          Quantity is required
-        </span>
-      </div>
-
-      <button type="submit" class="btn btn-default">Submit</button>
-
-    </form>
-  </div>
 </body>
+<input type="text" placeholder="search" [(ngModel)]="filterText" (keyup)="onChange($event)">
 <div *ngIf="productdata && productdata.length>0" class="container">
   <table class="table">
     <thead>
-      <tr>
-        <th>Product Name</th>
-        <th>Color</th>
-        <th>Size</th>
-        <th>Quantity</th>
+     <tr>
+   <th>image</th>
+  <th>Name</th>
+  <th>Category</th>
+  <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of productdata; index as i">
-        <td>{{data.name}}</td>
-        <td>{{data.color}}</td>
-        <td>{{data.size}}</td>
-        <td>{{data.quantity}}</td>
+      <tr *ngFor="let data of productdata | searchPipe :filterText">
+        <td >
+          <img [src]=data.image >
+         </td>
+        <td>{{data.Name}}</td>
+        <td>{{data.category}}</td>
+        <td>{{data.Price}}</td>
 
       </tr>
 

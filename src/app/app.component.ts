@@ -12,8 +12,8 @@ export class AppComponent {
   form: FormGroup
   submitted: boolean = false
   productdata: any = []
-
-  constructor(private fb: FormBuilder) {
+  filterText:any
+  constructor(private fb: FormBuilder,private service:ApiServiceService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       color: ['', Validators.required],
@@ -24,6 +24,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.getData()
+
     const ProductArr = new FormArray([
       new FormControl('product1'),
       new FormControl('red'),
@@ -51,5 +53,15 @@ export class AppComponent {
 
   get registerFormControl() {
     return this.form.controls;
+  }
+  getData(){
+    this.service.getProductData().subscribe((res:any)=>{
+      console.log(res)
+      this.productdata=res['ProductArray']
+
+    })
+  }
+  onChange(event:any){
+    console.log(event,"data")
   }
 }
